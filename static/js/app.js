@@ -23,7 +23,19 @@ function buildCharts(sampleNumber) {
         console.log(result);
         var otu_ids = result.otu_ids;
         var otu_labels = result.otu_labels;
-        var sample_values = result.sample_values; //graphing these variables
+        var sample_values = result.sample_values;
+
+
+        var layout = {
+            title: "Belly Button",
+            xaxis: { title: "otu_Labels" },
+            yaxis: { title: "sample_values" }
+        };
+
+        // Plot the chart to a div tag with id "bar-plot"
+        Plotly.newPlot("bar-plot", data, layout);
+
+        //graphing these variables
         //GRAPHING BAR CHART
         //var1
         //var 2
