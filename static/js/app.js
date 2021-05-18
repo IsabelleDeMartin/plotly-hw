@@ -25,15 +25,28 @@ function buildCharts(sampleNumber) {
         var otu_labels = result.otu_labels;
         var sample_values = result.sample_values;
 
+        var yticks = otu_ids.slice(0, 10).map(x => `OTU ${x}`).reverse()
+
+        var bardata = [
+            {
+
+                y: yticks,
+                x: sample_values.slice(0, 10).reverse(),
+                text: otu_labels.slice(0, 10).reverse(),
+                type: "bar",
+                orientation: "h",
+
+
+            }
+        ];
 
         var layout = {
             title: "Belly Button",
-            xaxis: { title: "otu_Labels" },
-            yaxis: { title: "sample_values" }
+            margin: { t: 30, l: 150 }
         };
 
         // Plot the chart to a div tag with id "bar-plot"
-        Plotly.newPlot("bar-plot", data, layout);
+        Plotly.newPlot("bar", bardata, layout);
 
         //graphing these variables
         //GRAPHING BAR CHART
@@ -41,7 +54,27 @@ function buildCharts(sampleNumber) {
         //var 2
 
         //plotly.newplot();
+        var layoutb = {
+            title: "Bacteria Per Sample",
+            hovermode: "closest",
+            xaxis: { title: "OTU" },
+            margin: { t: 30 }
 
+        };
+        var bdata = [
+            {
+                x: otu_ids,
+                y: sample_values,
+                text: otu_labels,
+                mode: "markers",
+                marker: {
+                    size: sample_values,
+                    color: otu_ids,
+                    colorscale: "Portland"
+                }
+            }
+        ];
+        Plotly.newPlot("bubble", bdata, layoutb);
 
 
 
